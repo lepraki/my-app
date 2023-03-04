@@ -1,51 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React from "react";
+import {useCounter} from ""
+import {useFetch} from ""
 
-function App() {
-  const newRegularFunction= function (a) {
-    if (a % 2==0){
-        return "El numero " + a + " es par"
-    }else {
-        return "El numero " + a + " es impar"
-    }
+export const MultipleCustomHooks = ()=>{
+
+    const {counter, increment}= useCounter(1)
+    const {data, isLoading, hasError}= useFetch("https://breakingbadapi.com/api/quotes/${counter}")
+
+    return(
+        <>
+        <h1>MultipleCustomHooks</h1>
+        <hr/>
+
+        {
+            isLoading ? (
+                <div className="alert alert-info text-center">
+                    Loading...
+                </div>
+            ): (
+                <blockquote className="blockquote text-end">
+                    <p className="mb-1">{data[0]?.quote}</p>
+                    <footer className="blockquote-footer">{data[0]?.author}</footer>
+
+                </blockquote>
+            )
+        }
+
+        <button className="btn btn-primary" onClick={()=> increment()}>Nex Quote</button>
+        
+        
+        </>
+    )
+
 }
-
-const arrowFunction = (a) => {
-    if (a % 2==0){
-        return "El numero " + a + " es par"
-    }else {
-        return "El numero " + a + " es impar"
-    }
-}
-
-console.log(newRegularFunction(4))
-console.log(arrowFunction(9))
-
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
-
-export default App
