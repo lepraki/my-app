@@ -1,51 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState } from "react";
+const App = ({value}) => {
+    const [counter,setCounter] = useState (value)
 
-function App() {
-  const newRegularFunction= function (a) {
-    if (a % 2==0){
-        return "El numero " + a + " es par"
-    }else {
-        return "El numero " + a + " es impar"
+    const handleAdd = () => {
+        setCounter(counter + 1)
     }
-}
-
-const arrowFunction = (a) => {
-    if (a % 2==0){
-        return "El numero " + a + " es par"
-    }else {
-        return "El numero " + a + " es impar"
+    const handleSubsstract = () => {
+        setCounter(counter - 1)
     }
+
+    const handleReset = () => {
+        setCounter(value)
+    }
+    return (
+        <>
+        <h1> Counter xD </h1>
+        <span> {counter} </span>
+        <button onClick={()=> handleAdd()}>+1</button>
+
+        <h1> handleSubsstract </h1>
+        <span> {counter} </span>
+        <button onClick={()=> handleSubsstract()}>-1</button>
+
+        <h1> handleReset </h1>
+        <span> {counter} </span>
+        <button onClick={()=> handleReset()}>=1</button>
+        </>
+
+        
+    )
 }
-
-console.log(newRegularFunction(4))
-console.log(arrowFunction(9))
-
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
-
 export default App
